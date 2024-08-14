@@ -7,16 +7,22 @@
       src="https://kit.fontawesome.com/2a19acece6.js"
       crossorigin="anonymous"
     ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./style/main.css" />
     <title>Maniani</title>
   </head>
   <body>
     <nav></nav>
 
-    <header id="header">
+    <header id="header" class="header">
       <div class="header__left">
         <div class="header__left--title">
-          <p>Anna Baczynska-Malys</p>
+          <p>Anna Baczyńska-Małys</p>
           <h1>Manicure & Make-up</h1>
         </div>
         <div class="header__left--content">
@@ -24,8 +30,8 @@
             Odkryj sztukę manicure'u i makijażu, które podkreślą Twoją naturalną
             urodę. Umów się już teraz!
           </p>
+          <a href="#">Umów się na wizytę</a>
         </div>
-        <a href="#">Umów się na wizytę</a>
       </div>
       <div class="header__right">
         <img src="./assets/img/hero.webp" alt="" role="presentation" />
@@ -34,10 +40,10 @@
     <section id="about-me" class="about-me">
       <h2>O mnie</h2>
       <div class="about-me__left">
-        <img src="#" alt="" role="presentation" />
+        <img src="./assets/img/about-me.webp" alt="" role="presentation" />
       </div>
-      <div class="about-me__rgiht">
-        <p>Witajcie</p>
+      <div class="about-me__right">
+        <p>Witajcie!</p>
         <p>
           Jestem Ania, pasjonatka piękna i tworzenia niepowtarzalnych
           stylizacji. Od lat z oddaniem poświęcam się sztuce manicure'u i
@@ -53,11 +59,39 @@
     </section>
     <section class="gallery">
       <h2>Realizacje</h2>
-      <div class="gallery__grid">
-        <div class="div1"><img src="#" alt="" role="presentation" /></div>
-        <div class="div2"><img src="#" alt="" role="presentation" /></div>
-        <div class="div3"><img src="#" alt="" role="presentation" /></div>
-      </div>
+      <i>
+        <input
+          checked
+          type="radio"
+          name="s"
+          style="background-image: url('./assets/img/manicure2.webp')"
+          title=""
+        />
+        <input
+          type="radio"
+          name="s"
+          style="background-image: url('./assets/img/about-me.webp')"
+          title=""
+        />
+        <input
+          type="radio"
+          name="s"
+          style="background-image: url('./assets/img/makeup2.webp')"
+          title=""
+        />
+        <input
+          type="radio"
+          name="s"
+          style="background-image: url('./assets/img/manicure1.webp')"
+          title=""
+        />
+        <input
+          type="radio"
+          name="s"
+          style="background-image: url('./assets/img/makeup1.webp')"
+          title=""
+        />
+      </i>
     </section>
     <section class="services">
       <h2>Uslugi / Cennik</h2>
@@ -94,7 +128,7 @@
           <h3>Dodatkowe usługi</h3>
           <ul>
             <li>Zdjęcie stylizacji - 40 zł</li>
-            <li>Naprawa jednego paznokcia - 20 zł</li>
+            <li>Naprawa paznokcia - 20 zł</li>
             <li>French/Babyboomer - 10 zł</li>
             <li>Małe zdobienia/pyłki - 5 zł</li>
           </ul>
@@ -104,7 +138,7 @@
       <p>Każdy dodatkowy km liczony w dwie strony od Wieruszowa - 5 zł</p>
     </section>
     <section class="testimonials">
-      <h2>Opinie</h2>
+      <h2 class="testimonials__title">Opinie</h2>
       <div class="testimonials__grid">
         <div class="testimonials__grid__card testimonials__grid__card--1">
           <div class="stars">
@@ -112,10 +146,16 @@
             ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
             ><i class="fa-solid fa-star"></i>
           </div>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+          <p>
+            "Przemiłej atmosferze towarzyszy pełen profesjonalizm. Ania potrafi
+            doradzić i wyczarować cuda nawet z najmniejszych paznokci. A make-up
+            zawsze idealnie jest dobrany do urody i okazji. Polecam z całego
+            serca! Piękne rezultaty · Wspaniałe zdobienia paznokci · Świetny
+            manicure · Profesjonalne produkty"
+          </p>
           <div class="user">
-            <img src="" alt="" role="presentation" />
-            <p>User Name</p>
+            <img src="./assets/img/about-me.webp" alt="" role="presentation" />
+            <p>Sabina</p>
           </div>
         </div>
         <div class="testimonials__grid__card testimonials__grid__card--2">
@@ -124,10 +164,13 @@
             ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
             ><i class="fa-solid fa-star"></i>
           </div>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+          <p>
+            "Super atmosfera, świetna obsługa i niesamowity efekt końcowy 🙂 do
+            zobaczenia 🙂 Piękne rezultaty · Profesjonalne produkty"
+          </p>
           <div class="user">
-            <img src="" alt="" role="presentation" />
-            <p>User Name</p>
+            <img src="./assets/img/about-me.webp" alt="" role="presentation" />
+            <p>Anna</p>
           </div>
         </div>
         <div class="testimonials__grid__card testimonials__grid__card--3">
@@ -136,10 +179,14 @@
             ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
             ><i class="fa-solid fa-star"></i>
           </div>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+          <p>
+            "Brak mi słów by opisać makijaż 🥹 Pierwszy raz w życiu ktoś zrobił
+            mi tak piękny makijaż 🥰 bardzo trwały ale delikatny bez uczucia
+            maski."
+          </p>
           <div class="user">
-            <img src="" alt="" role="presentation" />
-            <p>User Name</p>
+            <img src="./assets/img/about-me.webp" alt="" role="presentation" />
+            <p>Angelika</p>
           </div>
         </div>
         <div class="testimonials__grid__card testimonials__grid__card--4">
@@ -148,51 +195,30 @@
             ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
             ><i class="fa-solid fa-star"></i>
           </div>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+          <p>
+            "Makijaż wykonany perfekcyjnie i do tego przemiła atmosfera 👌😉"
+          </p>
           <div class="user">
-            <img src="" alt="" role="presentation" />
-            <p>User Name</p>
-          </div>
-        </div>
-        <div class="testimonials__grid__card testimonials__grid__card--5">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i>
-          </div>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-          <div class="user">
-            <img src="" alt="" role="presentation" />
-            <p>User Name</p>
-          </div>
-        </div>
-        <div class="testimonials__grid__card testimonials__grid__card--6">
-          <div class="stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i>
-          </div>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-          <div class="user">
-            <img src="" alt="" role="presentation" />
-            <p>User Name</p>
+            <img src="./assets/img/about-me.webp" alt="" role="presentation" />
+            <p>Ewelina</p>
           </div>
         </div>
       </div>
     </section>
-    <section class="contact">
+    <section class="contact" id="contact">
+      <h2>Kontakt</h2>
       <div class="contact__left">
-        <div class="contact__left__email">
+        <div class="contact__left__card">
           <p><i class="fa-solid fa-envelope"></i></p>
           <p>Email</p>
           <p>kontakt@maniani.pl</p>
         </div>
-        <div class="contact__left__tel">
+        <div class="contact__left__card">
           <p><i class="fa-solid fa-square-phone"></i></p>
-          <p>Anna Baczyńska-Małys</p>
+          <p>Telefon</p>
           <p>535 233 591</p>
         </div>
-        <div class="contact__left__adress">
+        <div class="contact__left__card">
           <p><i class="fa-solid fa-location-dot"></i></p>
           <p>Adres</p>
           <p>Wieruszów, Poland, 98-400</p>

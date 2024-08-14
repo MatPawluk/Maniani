@@ -1,3 +1,4 @@
+@use "./colors" as *;
 *,
 ::before,
 ::after {
@@ -7,4 +8,16 @@
 }
 html {
   font-size: 62.5%;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: $black;
+  font-weight: 600;
+}
+
+ul,
+li {
+  list-style: none;
 }
