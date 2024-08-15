@@ -36,10 +36,22 @@ h2 {
     background-color: rgba($main, 0.8);
     z-index: -1;
   }
+
+  @media screen and (min-width: 992px) {
+    font-size: 6.8rem;
+    &::before {
+      height: 4rem;
+      width: 20rem;
+    }
+  }
 }
 
 p {
   font-size: 1.8rem;
+
+  @media screen and (min-width: 992px) {
+    font-size: 2.4rem;
+  }
 }
 
 //HEADER
@@ -49,20 +61,6 @@ p {
   min-height: 100dvh;
   margin-block-end: 2rem;
   padding-block-end: 3rem;
-  @media screen and (min-width: 1200px) {
-    min-height: fit-content;
-
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 800px;
-      left: 500px;
-      z-index: -1;
-      background-color: $main;
-      transform: rotate(-45deg);
-    }
-  }
 
   &__left {
     display: flex;
@@ -135,9 +133,15 @@ p {
   &__left {
     margin: 3rem 2rem;
     position: relative;
+    width: fit-content;
+    height: fit-content;
     img {
       width: 320px;
-      border-radius: 8px;
+      border-radius: 8px 8px 0 8px;
+
+      @media screen and (min-width: 992px) {
+        width: 480px;
+      }
     }
     &::after {
       content: "";
@@ -145,8 +149,8 @@ p {
       height: 2rem;
       position: absolute;
       background-color: $main;
-      bottom: -34px;
-      right: 0;
+      bottom: -28px;
+      right: -20px;
     }
     &::before {
       content: "";
@@ -154,8 +158,13 @@ p {
       height: 20rem;
       position: absolute;
       background-color: $main;
-      bottom: -34px;
-      right: 0;
+      bottom: -28px;
+      right: -30px;
+    }
+
+    @media screen and (min-width: 768px) {
+      display: grid;
+      place-items: center;
     }
   }
 
@@ -164,9 +173,24 @@ p {
     font-size: 1.8rem;
     display: grid;
     gap: 20px;
+    place-items: center;
+
+    p:first-child {
+      width: 100%;
+    }
 
     p:last-child {
       font-weight: 600;
+    }
+
+    @media screen and (min-width: 1400px) {
+      max-width: 50%;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .container {
+      display: flex;
+      gap: 2rem;
     }
   }
 }
@@ -285,6 +309,14 @@ p {
     place-items: center;
     margin-block: 8rem 3rem;
 
+    @media screen and (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-column-gap: 2rem;
+      grid-row-gap: 2rem;
+      align-items: stretch;
+    }
+
     &__card {
       display: grid;
       gap: 3rem;
@@ -296,9 +328,10 @@ p {
       h3 {
         text-align: center;
         position: relative;
+        height: fit-content;
         &::before {
           content: "";
-          height: 0.3rem;
+          height: 0.2rem;
           width: 100%;
           position: absolute;
           bottom: -14px;
@@ -342,13 +375,27 @@ p {
     place-items: center;
     margin-block: 8rem 3rem;
 
+    @media screen and (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-column-gap: 2rem;
+      grid-row-gap: 2rem;
+      align-items: stretch;
+    }
+
     &__card {
       display: grid;
       gap: 3rem;
       padding: 1.8rem 3rem;
       border: 1px solid $black;
+      border-top: 5px solid $black;
+      border-radius: 8px 8px 0 0;
       font-size: 1.8rem;
       max-width: 320px;
+      //   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 310" fill="%23B0B0B0"><path d="M197.54 177.67h33.96l-26.1 33.28c-3.53 4.5-3.14 10.92.9 14.96l16.1 16.1c4.82 4.82 12.79 4.31 16.95-1.1l24.86-32.32A114.729 114.729 0 0 0 288 138.63V87.21c0-12.45-10.09-22.54-22.54-22.54h-67.91c-12.45 0-22.54 10.09-22.54 22.54v67.91c-.01 12.46 10.08 22.55 22.53 22.55zm-153 0H78.5l-26.1 33.28c-3.53 4.5-3.14 10.92.9 14.96l16.1 16.1c4.82 4.82 12.79 4.31 16.95-1.1l24.86-32.32A114.729 114.729 0 0 0 135 138.63V87.21c0-12.45-10.09-22.54-22.54-22.54H44.54C32.09 64.67 22 74.76 22 87.21v67.91c0 12.46 10.09 22.55 22.54 22.55z"></path></svg>');
+      //   background-size: 80px;
+      //   background-repeat: no-repeat;
+      //   background-position: 100% 10%;
       .stars {
         display: flex;
         gap: 5px;
@@ -390,6 +437,11 @@ p {
     padding-inline-start: 8px;
     display: grid;
     gap: 3rem;
+    @media screen and (min-width: 768px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
     &__card {
       display: grid;
       gap: 0.5rem;
@@ -397,5 +449,8 @@ p {
         font-size: 3.5rem;
       }
     }
+  }
+  &__right {
+    display: none;
   }
 }
