@@ -1,64 +1,92 @@
-/*	CHECK FOR PREFERED REDUCED MOTION
-		AND IF SO, DO NOT RUN ANY OF THE SCRIPTS
-		SPLITTING THE LIST ELEMENT INTO MULTIPLE
-		LISTS OR APPLYING THE SCROLL ANIMATION
-*/
-const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-if (mediaQuery && !mediaQuery.matches) {
-  const tagScroller = document.querySelector(".tag-scroller");
-  const allTags = tagScroller.querySelectorAll("li");
+class Slider {
+  constructor(slider) {
+    this.slider = slider;
+    this.display = slider.querySelector(".image-display");
+    this.navButtons = Array.from(slider.querySelectorAll(".nav-button"));
+    this.prevButton = slider.querySelector(".prev-button");
+    this.nextButton = slider.querySelector(".next-button");
+    this.sliderNavigation = slider.querySelector(".slider-navigation");
+    this.currentSlideIndex = 0;
+    this.preloadedImages = {};
 
-  function createElement(tagName, className = "") {
-    const elem = document.createElement(tagName);
-    elem.className = className;
-    return elem;
+    this.initialize();
   }
 
-  function scrollersFrom(elements, numColumns = 2) {
-    const fragment = new DocumentFragment();
-    elements.forEach((element, i) => {
-      const column = i % numColumns;
-      const children = fragment.children;
-      if (!children[column])
-        fragment.appendChild(createElement("ul", "tag-list"));
-      children[column].appendChild(element);
-    });
-    return fragment;
+  initialize() {
+    this.setupSlider();
+    this.preloadImages();
+    this.eventListeners();
   }
 
-  /*	SPLIT THE LIST ELEMENT INTO TWO LISTS
-			AND CALL THE ANIMATION
-	*/
-  const scrollers = scrollersFrom(allTags, 2);
-  tagScroller.innerHTML = "";
-  tagScroller.appendChild(scrollers);
-  addScrolling();
+  setupSlider() {
+    this.showSlide(this.currentSlideIndex);
+  }
 
-  /*	ADD scrolling CLASS TO THE WRAPPER ELEMENT,
-			CLONE EACH LIST ITEM TO MAKE THE LIST LONG ENOUGH
-			FOR INFINITE SCROLL AND THEN CALCULATE THE DURATION
-			BASED ON WIDTH OF EACH SCROLLER TO MAKE THEM
-			MOVE AT THE SAME RATE OF SPEED
-			
-			DEPENDING ON THE WIDTH OF .tag-scrollers, THE NUMBER OF
-			LIST ITEMS AND THEIR INDIVIDUAL WIDTH, YOU MIGHT NEED
-			TO CLONE THEM TWO TIMES EACH TO BE SURE EACH .tag-scroller
-			WILL BE WIDE ENOUGH TO SUPPORT INFINITE SCROLL
-			
-			THIS COULD OF COURSE BE ADDED TO THE SCRIPT
-			BUT FOR OUR USE CASE, WE KNOW THE MINIMUM NUMBER OF
-			LIST ELEMENTS WILL BE ENOUGH FOR ONE CLONE EACH
-	*/
-  function addScrolling() {
-    tagScroller.classList.add("scrolling");
-    document.querySelectorAll(".tag-list").forEach((tagList) => {
-      const scrollContent = Array.from(tagList.children);
-      scrollContent.forEach((listItem) => {
-        const clonedItem = listItem.cloneNode(true);
-        clonedItem.setAttribute("aria-hidden", true);
-        tagList.appendChild(clonedItem);
-      });
-      tagList.style.setProperty("--duration", tagList.clientWidth / 100 + "s");
+  showSlide(index) {
+    this.currentSlideIndex = index;
+    const navButtonImg =
+      this.navButtons[this.currentSlideIndex].querySelector("img");
+    if (navButtonImg) {
+      const imgClone = navButtonImg.cloneNode();
+      this.display.replaceChildren(imgClone);
+    }
+    this.updateNavButtons();
+  }
+
+  updateNavButtons() {
+    this.navButtons.forEach((button, buttonIndex) => {
+      const isSelected = buttonIndex === this.currentSlideIndex;
+      button.setAttribute("aria-selected", isSelected);
+      if (isSelected) button.focus();
     });
+  }
+
+  preloadImages() {
+    this.navButtons.forEach((button) => {
+      const imgElement = button.querySelector("img");
+      if (imgElement) {
+        const imgSrc = imgElement.src;
+        if (!this.preloadedImages[imgSrc]) {
+          this.preloadedImages[imgSrc] = new Image();
+          this.preloadedImages[imgSrc].src = imgSrc;
+        }
+      }
+    });
+  }
+
+  eventListeners() {
+    document.addEventListener("keydown", (event) => {
+      this.handleAction(event.key);
+    });
+
+    this.sliderNavigation.addEventListener("click", (event) => {
+      const targetButton = event.target.closest(".nav-button");
+      const index = targetButton ? this.navButtons.indexOf(targetButton) : -1;
+      if (index !== -1) {
+        this.showSlide(index);
+      }
+    });
+
+    this.prevButton.addEventListener("click", () => this.handleAction("prev"));
+    this.nextButton.addEventListener("click", () => this.handleAction("next"));
+  }
+
+  handleAction(action) {
+    if (action === "Home") {
+      this.currentSlideIndex = 0;
+    } else if (action === "End") {
+      this.currentSlideIndex = this.navButtons.length - 1;
+    } else if (action === "ArrowRight" || action === "next") {
+      this.currentSlideIndex =
+        (this.currentSlideIndex + 1) % this.navButtons.length;
+    } else if (action === "ArrowLeft" || action === "prev") {
+      this.currentSlideIndex =
+        (this.currentSlideIndex - 1 + this.navButtons.length) %
+        this.navButtons.length;
+    }
+
+    this.showSlide(this.currentSlideIndex);
   }
 }
+
+const ImageSlider = new Slider(document.querySelector(".image-slider"));

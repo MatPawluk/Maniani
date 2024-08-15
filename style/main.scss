@@ -1,11 +1,20 @@
 @use "./colors" as *;
 @use "./reset" as *;
 
+:root {
+  --active-color: hsl(204 100 53);
+  --bg-color: #e1e3e5;
+  --icon-default: hsl(203 5 75);
+  --icon-accent: hsl(203 15 98);
+  --navigation-color: hsl(203 5 25 / 0.3);
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   display: grid;
   place-items: center;
   min-height: 100dvh;
+  background-color: #f0f0f0;
 }
 
 header,
@@ -15,8 +24,11 @@ section {
 }
 
 section {
-  background-color: #fff;
   margin-block: 2rem;
+
+  @media screen and (min-width: 1200px) {
+    text-align: center;
+  }
 }
 
 h2 {
@@ -25,7 +37,6 @@ h2 {
   position: relative;
   z-index: 2;
   padding-inline-start: 0.8rem;
-  width: 100vw;
   &::before {
     content: "";
     position: absolute;
@@ -40,8 +51,9 @@ h2 {
   @media screen and (min-width: 992px) {
     font-size: 6.8rem;
     &::before {
-      height: 4rem;
-      width: 20rem;
+      height: 7rem;
+      width: 19.5rem;
+      left: unset;
     }
   }
 }
@@ -125,11 +137,33 @@ p {
       overflow-x: hidden;
     }
   }
+  @media screen and (min-width: 1200px) {
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 0;
+    overflow: hidden;
+
+    &__right {
+      align-self: flex-end;
+    }
+    &__left {
+      max-width: 30%;
+      h1 {
+        font-size: 8rem;
+        &::after {
+          width: 37rem;
+          left: 1rem;
+        }
+      }
+    }
+  }
 }
 
 // ABOUT ME
 
 .about-me {
+  text-align: left;
   &__left {
     margin: 3rem 2rem;
     position: relative;
@@ -141,6 +175,9 @@ p {
 
       @media screen and (min-width: 992px) {
         width: 480px;
+      }
+      @media screen and (min-width: 1400px) {
+        width: 680px;
       }
     }
     &::after {
@@ -191,113 +228,160 @@ p {
     .container {
       display: flex;
       gap: 2rem;
+      padding-block: 3rem;
     }
   }
 }
 
 // GALLERY ********FIX AD JS***********
-
 .gallery {
+  h2 {
+    margin-block-end: 3rem;
+  }
+}
+
+.image-slider {
+  display: flex;
+  flex-flow: column;
+  width: clamp(360px, 96vw, 830px);
+  aspect-ratio: 16 / 9;
+  min-height: 300px;
+  overflow: hidden;
+  container-type: inline-size;
+  contain: content;
+}
+
+.slider__content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider-control--button {
+  border: 0;
+  background: 0;
+  outline: 0;
+  cursor: pointer;
+  place-content: center;
+  padding-inline: 3vw;
+  z-index: 1;
   display: grid;
-  place-items: center;
-  i {
-    margin-block: 8rem;
-    position: relative;
-    display: block;
-    width: 340px;
-    height: 500px;
-    overflow: hidden;
-    border-radius: 5px;
+}
+
+.icon {
+  height: 2rem;
+  width: 2rem;
+  fill: var(--icon-default);
+  border-radius: 50%;
+}
+
+// .slider-control--button:where(:hover) {
+//   background-image: linear-gradient(
+//     to var(--position),
+//     #0000 0%,
+//     #0002,
+//     80%,
+//     #0006 100%
+//   );
+//   .icon {
+//     fill: var(--icon-accent);
+//     background: #0001;
+//   }
+// }
+
+// .slider-control--button:active {
+//   outline: 0.2em solid hsl(204 100 53);
+//   outline-offset: -0.5em;
+// }
+
+.prev-button {
+  --position: left;
+}
+.next-button {
+  --position: right;
+}
+
+.image-display {
+  position: fixed;
+  inset: 0;
+}
+
+.slider-navigation {
+  z-index: 10;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-columns: 100%;
+  gap: 1.25rem;
+  padding: 1rem;
+  place-content: center;
+  background-color: var(--navigation-color);
+  backdrop-filter: blur(6px);
+}
+
+.nav-button {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5em;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  aspect-ratio: 16 / 9;
+  transition: filter 150ms linear, scale 266ms ease;
+}
+
+.thumbnail {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.nav-button[aria-selected="true"] {
+  scale: 1.1;
+}
+
+.nav-button[aria-selected="true"],
+.nav-button:focus-visible {
+  outline: 0.2em solid var(--active-color);
+  outline-offset: 0.2em;
+}
+
+.nav-button[aria-selected="false"] {
+  filter: opacity(0.7);
+}
+
+.nav-button[aria-selected="false"]:where(:hover, :focus-visible) {
+  filter: opacity(1);
+}
+
+@container (max-width: 660px) {
+  .nav-button:not(:has(img)) {
+    background-color: rgb(241, 235, 232);
   }
 
-  i:before,
-  i:after {
-    content: "⥪";
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    z-index: 2;
-    width: 3rem;
-    height: 3rem;
-    background: $main;
-    color: white;
-    border-radius: 50%;
+  .slider-navigation {
     display: flex;
     justify-content: center;
-    align-items: center;
-    pointer-events: none;
+    padding-block: 1.5em;
   }
 
-  i:after {
-    content: "⥭";
-    left: auto;
-    right: 1rem;
-  }
-
-  /* I haven't found a way for IE and Edge to let me style inputs that way */
-  input {
-    appearance: none;
-    -ms-appearance: none;
-    -webkit-appearance: none;
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 5px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    transform: translateX(100%);
-    transition: transform ease-in-out 400ms;
-    z-index: 1;
-  }
-
-  input:focus {
-    outline: none;
-  }
-
-  input:after {
-    content: attr(title);
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 5px;
-  }
-
-  input:not(checked):before {
-    content: "";
-    position: absolute;
-    width: 2rem;
-    height: 2rem;
+  .nav-button {
+    inline-size: 0.625rem;
+    aspect-ratio: 1;
     border-radius: 50%;
-    top: 50%;
-    left: calc(-100% + 1rem);
   }
 
-  input:checked:before {
+  .nav-button > .thumbnail {
     display: none;
-    left: 1rem;
   }
 
-  input:checked {
-    transform: translateX(0);
-    pointer-event: none;
-    z-index: 0;
-    box-shadow: -5px 10px 20px -15px rgba(0, 0, 0, 1);
-  }
-
-  input:checked + input:before {
-    left: -3rem;
-  }
-
-  input:checked + input ~ input:before {
-    display: none;
+  .nav-button[aria-selected="true"] {
+    background-color: black;
+    scale: 1.5;
   }
 }
 
@@ -315,6 +399,31 @@ p {
       grid-column-gap: 2rem;
       grid-row-gap: 2rem;
       align-items: stretch;
+    }
+
+    @media screen and (min-width: 998px) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      justify-items: stretch;
+      padding-inline: 3rem;
+
+      .services__grid__card-1 {
+        grid-area: 1 / 1 / 2 / 2;
+      }
+      .services__grid__card-2 {
+        grid-area: 1 / 2 / 2 / 3;
+      }
+      .services__grid__card-3 {
+        grid-area: 1 / 3 / 2 / 4;
+      }
+      .services__grid__card-4 {
+        grid-area: 2 / 1 / 3 / 3;
+      }
+      .services__grid__card-5 {
+        grid-area: 2 / 3 / 3 / 4;
+      }
     }
 
     &__card {
@@ -349,6 +458,12 @@ p {
 
     &__card-4 {
       display: none;
+      @media screen and (min-width: 992px) {
+        display: block;
+        background-image: url(../assets/img/image.jpg);
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
     }
   }
   p {
@@ -381,10 +496,24 @@ p {
       grid-column-gap: 2rem;
       grid-row-gap: 2rem;
       align-items: stretch;
+      width: fit-content;
+      padding-inline: 3rem;
+      width: 100%;
+    }
+
+    @media screen and (min-width: 992px) {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 4rem;
+      grid-row-gap: 1rem;
+      width: fit-content;
     }
 
     &__card {
-      display: grid;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       gap: 3rem;
       padding: 1.8rem 3rem;
       border: 1px solid $black;
@@ -437,6 +566,7 @@ p {
     padding-inline-start: 8px;
     display: grid;
     gap: 3rem;
+
     @media screen and (min-width: 768px) {
       display: flex;
       align-items: center;
@@ -445,6 +575,8 @@ p {
     &__card {
       display: grid;
       gap: 0.5rem;
+      border-right: 1px solid $black;
+      padding-inline-end: 3rem;
       i {
         font-size: 3.5rem;
       }
