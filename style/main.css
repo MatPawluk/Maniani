@@ -222,6 +222,7 @@ nav ul li a:hover::after {
   min-height: 100dvh;
   margin-block-end: 2rem;
   padding-block-end: 3rem;
+  width: 100%;
 }
 .header__left {
   display: flex;
@@ -281,8 +282,12 @@ nav ul li a:hover::after {
     overflow: hidden;
   }
   .header__right {
-    align-self: first baseline;
     overflow: hidden;
+  }
+  .header__right img {
+    height: 1000px;
+    position: relative;
+    top: -27%;
   }
   .header__left {
     max-width: 50%;

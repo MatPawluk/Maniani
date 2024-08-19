@@ -218,6 +218,7 @@ nav {
   min-height: 100dvh;
   margin-block-end: 2rem;
   padding-block-end: 3rem;
+  width: 100%;
 
   &__left {
     display: flex;
@@ -277,8 +278,12 @@ nav {
     overflow: hidden;
 
     &__right {
-      align-self: first baseline;
       overflow: hidden;
+      img {
+        height: 1000px;
+        position: relative;
+        top: -27%;
+      }
     }
     &__left {
       max-width: 50%;
