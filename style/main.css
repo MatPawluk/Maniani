@@ -62,6 +62,7 @@ h1 {
   font-size: 8rem;
   line-height: 0.8;
   margin-block-end: 1.8rem;
+  text-transform: uppercase;
 }
 
 h2 {
