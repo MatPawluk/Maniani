@@ -7,7 +7,9 @@
 }
 
 html {
+  scroll-behavior: smooth;
   font-size: 62.5%;
+  scroll-padding: 70px;
 }
 
 a {
@@ -41,7 +43,7 @@ body {
 header,
 section {
   max-width: 1440px;
-  overflow-x: hidden;
+  width: 100%;
 }
 
 section {
@@ -301,8 +303,14 @@ nav ul li a:hover::after {
   }
 }
 
-.about-me {
-  text-align: left;
+.no-scroll {
+  overflow: hidden;
+}
+
+@media screen and (min-width: 992px) {
+  .about-me {
+    text-align: center;
+  }
 }
 .about-me__left {
   margin: 3rem 2rem;
@@ -373,9 +381,14 @@ nav ul li a:hover::after {
     display: flex;
     gap: 2rem;
     padding-block: 3rem;
+    text-align: left;
   }
 }
 
+.gallery {
+  display: grid;
+  justify-content: center;
+}
 .gallery h2 {
   margin-block-end: 3rem;
 }
@@ -383,7 +396,7 @@ nav ul li a:hover::after {
 .image-slider {
   display: flex;
   flex-flow: column;
-  width: clamp(360px, 96vw, 830px);
+  width: clamp(360px, 96vw, 960px);
   aspect-ratio: 16/9;
   min-height: 300px;
   overflow: hidden;
@@ -411,7 +424,7 @@ nav ul li a:hover::after {
 .icon {
   height: 2rem;
   width: 2rem;
-  fill: var(--icon-default);
+  fill: rgba(196, 196, 196, 0.8);
   border-radius: 50%;
 }
 
@@ -437,7 +450,7 @@ nav ul li a:hover::after {
   gap: 1.25rem;
   padding: 1rem;
   place-content: center;
-  background-color: var(--navigation-color);
+  background-color: rgba(196, 196, 196, 0.3);
   -webkit-backdrop-filter: blur(6px);
           backdrop-filter: blur(6px);
 }
@@ -470,7 +483,7 @@ nav ul li a:hover::after {
 
 .nav-button[aria-selected=true],
 .nav-button:focus-visible {
-  outline: 0.2em solid var(--active-color);
+  outline: 0.2em solid hsl(0, 0%, 77%);
   outline-offset: 0.2em;
 }
 
@@ -577,7 +590,7 @@ nav ul li a:hover::after {
   .services__grid__card-4 {
     display: block;
     background-image: url(../assets/img/image.jpg);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
   }
 }

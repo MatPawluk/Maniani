@@ -93,8 +93,22 @@ const ImageSlider = new Slider(document.querySelector(".image-slider"));
 
 const burger = document.getElementById("burger");
 const ul = document.querySelector("nav ul");
+const links = ul.querySelectorAll("li a");
 
 burger.addEventListener("click", () => {
   burger.classList.toggle("show-x");
   ul.classList.toggle("show");
+
+  // Zablokowanie/odblokowanie scrolla
+  document.body.classList.toggle("no-scroll");
+});
+
+links.forEach((link) => {
+  link.addEventListener("click", () => {
+    burger.classList.remove("show-x");
+    ul.classList.remove("show");
+
+    // Odblokowanie scrolla po zamknięciu menu
+    document.body.classList.remove("no-scroll");
+  });
 });

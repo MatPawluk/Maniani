@@ -20,7 +20,7 @@ body {
 header,
 section {
   max-width: 1440px;
-  overflow-x: hidden;
+  width: 100%;
 }
 
 section {
@@ -298,15 +298,22 @@ nav {
   }
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 // ABOUT ME
 
 .about-me {
-  text-align: left;
+  @media screen and (min-width: 992px) {
+    text-align: center;
+  }
   &__left {
     margin: 3rem 2rem;
     position: relative;
     width: fit-content;
     height: fit-content;
+
     img {
       width: 320px;
       border-radius: 8px 8px 0 8px;
@@ -367,12 +374,15 @@ nav {
       display: flex;
       gap: 2rem;
       padding-block: 3rem;
+      text-align: left;
     }
   }
 }
 
 // GALLERY ********FIX AD JS***********
 .gallery {
+  display: grid;
+  justify-content: center;
   h2 {
     margin-block-end: 3rem;
   }
@@ -381,7 +391,7 @@ nav {
 .image-slider {
   display: flex;
   flex-flow: column;
-  width: clamp(360px, 96vw, 830px);
+  width: clamp(360px, 96vw, 960px);
   aspect-ratio: 16 / 9;
   min-height: 300px;
   overflow: hidden;
@@ -409,28 +419,9 @@ nav {
 .icon {
   height: 2rem;
   width: 2rem;
-  fill: var(--icon-default);
+  fill: rgba($main, 0.8);
   border-radius: 50%;
 }
-
-// .slider-control--button:where(:hover) {
-//   background-image: linear-gradient(
-//     to var(--position),
-//     #0000 0%,
-//     #0002,
-//     80%,
-//     #0006 100%
-//   );
-//   .icon {
-//     fill: var(--icon-accent);
-//     background: #0001;
-//   }
-// }
-
-// .slider-control--button:active {
-//   outline: 0.2em solid hsl(204 100 53);
-//   outline-offset: -0.5em;
-// }
 
 .prev-button {
   --position: left;
@@ -453,7 +444,7 @@ nav {
   gap: 1.25rem;
   padding: 1rem;
   place-content: center;
-  background-color: var(--navigation-color);
+  background-color: rgba($main, 0.3);
   backdrop-filter: blur(6px);
 }
 
@@ -484,7 +475,7 @@ nav {
 
 .nav-button[aria-selected="true"],
 .nav-button:focus-visible {
-  outline: 0.2em solid var(--active-color);
+  outline: 0.2em solid $main;
   outline-offset: 0.2em;
 }
 
@@ -599,7 +590,7 @@ nav {
       @media screen and (min-width: 992px) {
         display: block;
         background-image: url(../assets/img/image.jpg);
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
       }
     }
@@ -659,10 +650,7 @@ nav {
       border-radius: 8px 8px 0 0;
       font-size: 1.8rem;
       max-width: 320px;
-      //   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 310" fill="%23B0B0B0"><path d="M197.54 177.67h33.96l-26.1 33.28c-3.53 4.5-3.14 10.92.9 14.96l16.1 16.1c4.82 4.82 12.79 4.31 16.95-1.1l24.86-32.32A114.729 114.729 0 0 0 288 138.63V87.21c0-12.45-10.09-22.54-22.54-22.54h-67.91c-12.45 0-22.54 10.09-22.54 22.54v67.91c-.01 12.46 10.08 22.55 22.53 22.55zm-153 0H78.5l-26.1 33.28c-3.53 4.5-3.14 10.92.9 14.96l16.1 16.1c4.82 4.82 12.79 4.31 16.95-1.1l24.86-32.32A114.729 114.729 0 0 0 135 138.63V87.21c0-12.45-10.09-22.54-22.54-22.54H44.54C32.09 64.67 22 74.76 22 87.21v67.91c0 12.46 10.09 22.55 22.54 22.55z"></path></svg>');
-      //   background-size: 80px;
-      //   background-repeat: no-repeat;
-      //   background-position: 100% 10%;
+
       .stars {
         display: flex;
         gap: 5px;
